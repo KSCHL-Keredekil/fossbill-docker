@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  fossbilling:
+    build: . # <-- PERHATIKAN PERUBAHAN DI SINI
+    restart: always
+    ports:
+      - 8880:80 # Anda bisa ubah port 8880 jika perlu
+    volumes:
+      - fossbilling_data:/var/www/html
+  mysql:
+    image: mysql:8.2
+    restart: always
+    environment:
+      MYSQL_DATABASE: fossbilling
+      MYSQL_USER: fossbilling
+      MYSQL_PASSWORD: fossbilling # Ganti dengan password yang aman
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  fossbilling_data:
+  mysql_data:
